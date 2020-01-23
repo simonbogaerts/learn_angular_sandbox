@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
+  firstName = 'John';
+  lastName = 'Doe';
+  age = 30;
+  address = {
+    street: '50 Main st',
+    city: 'Boston',
+    state: 'MA'
+  };
+
+  // methods
   constructor() {}
+
+  showAge() {
+    return this.age;
+  }
 }
