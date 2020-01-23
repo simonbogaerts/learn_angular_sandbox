@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent {
-  firstName = 'John';
-  lastName = 'Doe';
-  age = 30;
-  address = {
-    street: '50 Main st',
-    city: 'Boston',
-    state: 'MA'
-  };
+export class UserComponent implements OnInit {
+  // properties
+  user: User;
 
   // methods
   constructor() {}
 
-  showAge() {
-    return this.age;
+  ngOnInit(): void {
+    this.user = {
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30,
+      address: {
+        street: 'Main St. ',
+        city: 'Boston',
+        state: 'MA'
+      }
+    };
   }
 }
