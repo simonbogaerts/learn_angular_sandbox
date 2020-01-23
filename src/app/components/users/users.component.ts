@@ -10,6 +10,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   showExtended: boolean = true;
   loaded: boolean = false;
+  enableAdd: boolean = true;
 
   constructor() {}
 
@@ -18,12 +19,14 @@ export class UsersComponent implements OnInit {
       {
         firstName: 'John',
         lastName: 'Doe',
-        age: 30,
+        age: 70,
         address: {
           street: '50 Main St. ',
           city: 'Boston',
           state: 'MA'
-        }
+        },
+        isActive: false,
+        registered: new Date('01/02/2020 08:30:00')
       },
       {
         firstName: 'Kevin',
@@ -33,7 +36,9 @@ export class UsersComponent implements OnInit {
           street: '21 Secondary St. ',
           city: 'Boston',
           state: 'MA'
-        }
+        },
+        isActive: true,
+        registered: new Date('11/02/2010 08:30:00')
       },
       {
         firstName: 'Jane',
@@ -43,24 +48,15 @@ export class UsersComponent implements OnInit {
           street: '50 Main St. ',
           city: 'Boston',
           state: 'MA'
-        }
+        },
+        isActive: true,
+        registered: new Date('01/02/2019 08:30:00')
       }
     ];
 
     this.loaded = true;
 
     //this.showExtended = false;
-
-    this.addUser({
-      firstName: 'David',
-      lastName: 'Jackson'
-      // age: 22,
-      // address: {
-      //   street: '60 Wake St. ',
-      //   city: 'Boston',
-      //   state: 'MA'
-      // }
-    });
   }
 
   addUser(user: User) {
