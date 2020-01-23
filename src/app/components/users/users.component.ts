@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -8,9 +8,17 @@ import { User } from 'src/app/models/user.model';
 })
 export class UsersComponent implements OnInit {
   users: User[];
+  user: User = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    hide: false
+  };
   showExtended: boolean = true;
   loaded: boolean = false;
-  enableAdd: boolean = true;
+  enableAdd: boolean = false;
+  showUserForm: boolean = false;
+  @ViewChild('userForm') form: any;
 
   constructor() {}
 
@@ -19,38 +27,26 @@ export class UsersComponent implements OnInit {
       {
         firstName: 'John',
         lastName: 'Doe',
-        age: 70,
-        address: {
-          street: '50 Main St. ',
-          city: 'Boston',
-          state: 'MA'
-        },
+        email: 'john.doe@email.com',
         isActive: false,
-        registered: new Date('01/02/2020 08:30:00')
+        registered: new Date('01/02/2020 08:30:00'),
+        hide: true
       },
       {
         firstName: 'Kevin',
         lastName: 'Johnson',
-        age: 34,
-        address: {
-          street: '21 Secondary St. ',
-          city: 'Boston',
-          state: 'MA'
-        },
+        email: 'Kevin.Johnson@email.com',
         isActive: true,
-        registered: new Date('11/02/2010 08:30:00')
+        registered: new Date('11/02/2010 08:30:00'),
+        hide: true
       },
       {
         firstName: 'Jane',
         lastName: 'Doe',
-        age: 21,
-        address: {
-          street: '50 Main St. ',
-          city: 'Boston',
-          state: 'MA'
-        },
+        email: 'Jane.doe@email.com',
         isActive: true,
-        registered: new Date('01/02/2019 08:30:00')
+        registered: new Date('01/02/2019 08:30:00'),
+        hide: true
       }
     ];
 
@@ -59,7 +55,40 @@ export class UsersComponent implements OnInit {
     //this.showExtended = false;
   }
 
-  addUser(user: User) {
-    this.users.push(user);
+  // toggleHide(user) {
+  //   user.hide = !user.hide;
+  // }
+
+  // addUser() {
+  //   this.user.isActive = true;
+  //   this.user.registered = new Date();
+
+  //   this.users.unshift(this.user);
+
+  //   this.user = {
+  //     firstName: '',
+  //     lastName: '',
+  //     email: ''
+  //   };
+  // }
+
+  onSubmit({ value, valid }: { value: User; valid: boolean }) {
+    if (!valid) {
+      console.log('Form is not valid');
+    } else {
+      value.isActive = true;
+      value.registered = new Date();
+      value.hide = true;
+
+      this.users.unshift(value);
+
+      this.form.reset();
+    }
+  }
+
+  fireEvent(e) {
+    // console.log('button clicked');
+    console.log(e.type);
+    console.log(e.target.value);
   }
 }
